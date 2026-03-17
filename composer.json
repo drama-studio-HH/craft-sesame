@@ -1,0 +1,63 @@
+{
+  "name": "thedrama/craft-sesame",
+  "version": "1.0.0",
+  "description": "Sesame is a lightweight Craft CMS plugin that enables password-less authentication via magic links. Users receive a one-time, time-limited login link directly to their inbox, with no password required. This not only streamlines the login experience but also eliminates the risk of weak or compromised credentials. *Open Sesame* — just click the link and you're in.",
+  "type": "craft-plugin",
+  "keywords": [
+    "craft",
+    "cms",
+    "craftcms",
+    "craft-plugin",
+    "sesame",
+    "magic-login"
+  ],
+  "support": {
+    "email": "we@thedrama.de",
+    "issues": "https://github.com/drama-studio-HH/craft-sesame/issues?state=open",
+    "source": "https://github.com/drama-studio-HH/craft-sesame",
+    "docs": "https://github.com/drama-studio-HH/craft-sesame",
+    "rss": "https://github.com/drama-studio-HH/craft-sesame/commits/v2.atom"
+  },
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "thedrama",
+      "homepage": "https://thedrama.de"
+    }
+  ],
+  "require": {
+    "php": ">=8.2",
+    "craftcms/cms": "^5.0.0"
+  },
+  "require-dev": {
+    "craftcms/ecs": "dev-main",
+    "craftcms/phpstan": "dev-main"
+  },
+  "autoload": {
+    "psr-4": {
+      "thedrama\\craftsesame\\": "src/"
+    }
+  },
+  "extra": {
+    "handle": "sesame",
+    "name": "sesame",
+    "developer": "thedrama",
+    "documentationUrl": "https://github.com/drama-studio-HH/craft-sesame",
+    "class": "thedrama\\craftsesame\\Sesame"
+  },
+  "scripts": {
+    "check-cs": "ecs check --ansi",
+    "fix-cs": "ecs check --ansi --fix",
+    "phpstan": "phpstan --memory-limit=1G"
+  },
+  "config": {
+    "sort-packages": true,
+    "platform": {
+      "php": "8.2"
+    },
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true,
+      "craftcms/plugin-installer": true
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{% extends '_layouts/cp' %}
+
+{% do view.registerAssetBundle('thedrama\\craftsesame\\assetbundles\\SettingsAsset') %}
+
+{% if title is not defined %}
+    {% set title = 'Sesame' %}
+{% endif %}
+
+{% block content %}
+    {% block blockContent %}
+
+    {% endblock %}
+
+    <hr>
+
+    <div id="plugin-footer">
+        <div class="footer-left">
+            {% block footerButton %}
+
+            {% endblock %}
+        </div>
+
+        <div class="footer-right">
+            <a class="plugin-credit" href="https://thedrama.de" target="_blank">
+                thedrama
+            </a>
+        </div>
+    </div>
+{% endblock %}

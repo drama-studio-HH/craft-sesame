@@ -1,0 +1,12 @@
+{% extends "sesame/_layouts/html5" %}
+
+{% block content %}
+    <div>
+        {{ 'Unfortunately, we could not process your login request. Please fix any of the following errors:'|t('sesame') }}
+        <div class="errors">
+            {% for error in errors %}
+                <p>{{ error.message }}</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{
+  "name": "sesame",
+  "version": "1.0.0",
+  "description": "Sesame is a lightweight Craft CMS plugin that enables password-less authentication via magic links. Users receive a one-time, time-limited login link directly to their inbox, with no password required. This not only streamlines the login experience but also eliminates the risk of weak or compromised credentials. *Open Sesame* — just click the link and you're in.",
+  "license": "proprietary",
+  "author": "thedrama",
+  "type": "module",
+  "main": "src/resources/src/js/frontend.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd ./src/resources/src && vite build"
+  },
+  "dependencies": {
+    "toastify-js": "^1.12.0"
+  },
+  "devDependencies": {
+    "sass-embedded": "^1.98.0",
+    "svgo": "^4.0.1",
+    "vite": "^8.0.0",
+    "vite-plugin-image-optimizer": "^2.0.3"
+  }
+}

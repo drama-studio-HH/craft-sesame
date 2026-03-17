@@ -1,0 +1,77 @@
+{% extends 'sesame/_layouts' %}
+{% import '_includes/forms' as forms %}
+
+{% requireAdmin %}
+
+{% set crumbs = [
+    { label: 'Sesame', url: url('sesame/settings') },
+    { label: 'Settings' | t('app'), url: url('sesame/settings') },
+] %}
+
+{% set fullPageForm = true %}
+
+{% block blockContent %}
+
+    <input type='hidden' name='action' value='sesame/settings/save-settings'>
+
+    <div id='tab-general'>
+        <h2>{{ 'General Settings'|t('sesame') }}</h2>
+
+        {% namespace 'settings' %}
+            {{ forms.textAreaField({
+                first: true,
+                label: 'Allowed hosts' | t('sesame'),
+                instructions: 'Enter the host names (for example \'gmail.com\') for which user registration is allowed. An empty list will allow any emails.' | t('sesame'),
+                rows: 10,
+                id: 'allowedHosts',
+                name: 'allowedHosts',
+                value: settings.getSettingAsMultiline('allowedHosts'),
+                errors: settings.getErrors('allowedHosts'),
+            }) }}
+
+            {% set logoSource = settings.getLogoSourceAsArray() %}
+
+            {% if logoSource.type == 'asset' %}
+                {% set elements = craft.assets().id(logoSource.elements ?? []).all() %}
+                {{ forms.elementSelectField({
+                    label: 'Select logo file',
+                    id: 'logoId',
+                    name: 'logoId',
+                    elements: elements,
+                    viewMode: 'large',
+                    elementType: 'craft\\elements\\Asset',
+                    criteria: {
+                        kind: ['image'],
+                    },
+                    jsClass: 'Craft.AssetSelectInput',
+                    selectionLabel: 'Select logo file'|t('sesame'),
+                    limit: 1,
+                    errors: settings.getErrors('logoId'),
+                }) }}
+            {% else %}
+                test
+            {% endif %}
+
+            {{ forms.textField({
+                type: 'number',
+                label: 'Token Lifetime (in seconds)' | t('sesame'),
+                instructions: 'Enter the lifetime of the tokens Sesame sends out, in seconds. Defaults to 900 seconds (15 minutes).' | t('sesame'),
+                name: 'lifetime',
+                size: 4,
+                placeholder: 900,
+                value: settings.lifetime,
+                errors: settings.getErrors('lifetime'),
+            }) }}
+
+            {{ forms.textField({
+                label: 'Redirect URL' | t('sesame'),
+                instructions: 'Enter the URL which users should be redirected to after successfully logging in. Defaults to the current site\'s base URL.' | t('sesame'),
+                name: 'redirectUrl',
+                value: settings.redirectUrl,
+                errors: settings.getErrors('redirectUrl'),
+            }) }}
+
+        {% endnamespace %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="{{ currentSite.language }}" class="no-js">
+
+<head>
+    {# header #}
+    {% block header %}
+        {% include "sesame/_partials/_html/_html-header.twig" %}
+    {% endblock %}
+</head>
+
+<body>
+
+{# hooks #}
+{% hook 'after-body-start' %}
+
+{# page #}
+{% block page %}
+    <div class="page">
+
+        {# content #}
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+
+            {# flashes #}
+            <div class="flashes">
+                {% block flashes %}
+                {% endblock %}
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{# footer #}
+{% block footer %}
+    {% include "sesame/_partials/_html/_html-footer.twig" %}
+{% endblock %}
+</body>
+
+</html>

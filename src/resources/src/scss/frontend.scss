@@ -1,0 +1,213 @@
+@use "sass:string";
+@use "toastify-js/src/toastify.css";
+
+$sesameBlack: #353535;
+$sesameRed: #ff0004;
+$textColor: #333;
+$bodyBgColor: #e9ecef;
+$contentBgColor: #f9f9f9;
+$inputBgColor: #fff;
+$borderFocusColor: #111;
+$borderColor: #ccc;
+$borderRadius: 20px;
+$inputPaddingTop: 1.5rem;
+$inputPaddingBottom: 0.45rem;
+$inputPaddingX: 0.9rem;
+$labelSizeDefault: 1rem;
+$labelSizeFloat: 0.72rem;
+$labelTopDefault: 50%;
+$labelTopFloat: 0.3rem;
+$labelColorDefault: #555;
+$labelColorFloat: #111;
+
+// generate @font-face annotations and classes
+$fonts: ("Thin": 100, "Light": 300, "Regular": 400, "Medium": 500, "Bold": 700, "ExtraBold": 800, "Black": 900);
+
+// class base
+.base {
+  font-family: "M PLUS Rounded 1c";
+  color: $textColor;
+}
+
+@each $name, $weight in $fonts {
+  @font-face {
+    font-family: "M PLUS Rounded 1c";
+    src: url("../fonts/MPLUSRounded1c-#{$name}.ttf");
+    font-weight: $weight;
+  }
+  .#{string.to-lower-case($name)} {
+    @extend .base;
+    font-weight: $weight;
+  }
+}
+
+
+:root {
+  --primary-color: #111; /* Hauptfarbe für Buttons und Fokus-Effekte */
+  --text-color: #333; /* Standard-Textfarbe */
+  --label-color: #555; /* Farbe für die Labels im Ruhezustand */
+  --label-float-color: #111; /* Farbe des Labels im gefloateten Zustand */
+  --border-color: #ccc; /* Standard-Rahmenfarbe */
+  --border-focus-color: #111; /* Rahmenfarbe bei Fokus */
+  --input-bg: #fff; /* Hintergrund für Eingabefelder */
+  --content-bg: #f9f9f9; /* Hintergrund des Containers */
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --border-radius: 20px;
+
+  /* Floating-Label-spezifische Werte */
+  --label-font-size-default: 1rem; /* Schriftgröße des Labels im Ruhezustand */
+  --label-font-size-float: 0.72rem; /* Schriftgröße des Labels im gefloateten Zustand */
+  --input-padding-top: 1.5rem; /* Oberes Padding, damit Eingabetext nicht hinter Label liegt */
+  --input-padding-bottom: 0.45rem;
+  --input-padding-x: 0.9rem;
+  --label-top-default: 50%; /* Vertikale Position des Labels im Ruhezustand */
+  --label-top-float: 0.3rem; /* Vertikale Position des Labels im gefloateten Zustand */
+}
+
+body {
+  @extend .regular;
+  background-color: $bodyBgColor;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.content {
+  background-color: $contentBgColor;
+  padding: 2rem;
+  border-radius: $borderRadius;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 450px;
+  width: 100%;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.form {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+
+  .btn {
+    @extend .medium;
+    display: inline-block;
+    width: 100%;
+    font-size: 1rem;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    background-color: $sesameBlack;
+    border: 2px solid $sesameBlack;
+    padding: 0.8rem;
+    border-radius: $borderRadius;
+    margin-top: 0.5rem;
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+    text-decoration: none;
+
+    &:hover {
+      background-color: $textColor;
+      border-color: $textColor;
+    }
+
+    &:focus-visible {
+      outline: 3px solid $sesameBlack;
+      outline-offset: 3px;
+    }
+  }
+}
+
+.field {
+  position: relative;
+  margin-bottom: 1rem;
+
+  input {
+    @extend .regular;
+    width: 100%;
+    padding: $inputPaddingTop $inputPaddingX $inputPaddingBottom;
+    font-size: $labelSizeDefault;
+    border: 1px solid $borderColor;
+    border-radius: $borderRadius;
+    background-color: $inputBgColor;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $borderFocusColor;
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.15);
+    }
+
+    &:focus-visible {
+      outline: 3px solid $borderFocusColor;
+      outline-offset: 2px;
+      box-shadow: none;
+    }
+
+    &:focus + label, &:not(:placeholder-shown) + label, .has-value + label {
+      top: $labelTopFloat;
+      transform: translateY(0);
+      font-size: $labelSizeFloat;
+      font-weight: 600;
+      color: $labelColorFloat;
+    }
+
+    &[aria-invalid="true"] {
+      border-color: $sesameRed;
+      box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.2);
+    }
+  }
+
+  label {
+    position: absolute;
+    left: $inputPaddingX;
+    top: $labelTopDefault;
+    transform: translateY(-50%);
+
+    font-size: $labelSizeDefault;
+    font-weight: 400;
+    color: $labelColorDefault;
+    line-height: 1;
+
+    transition: top 0.18s ease,
+    font-size 0.18s ease,
+    color 0.18s ease,
+    font-weight 0.18s ease;
+
+    pointer-events: none;
+    cursor: text;
+
+    background-color: transparent;
+
+    white-space: nowrap;
+  }
+}
+
+.field-error {
+  display: block;
+  font-size: 0.8rem;
+  color: $sesameRed;
+  margin-top: -0.5rem;
+  margin-bottom: 0.75rem;
+  text-align: left;
+  padding-left: $inputPaddingX;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field label,
+  .field input,
+  .form .btn {
+    transition: none;
+  }
+}
+
+.toast-container {
+  display: none;
+}
