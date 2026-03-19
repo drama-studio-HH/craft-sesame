@@ -36,7 +36,7 @@ class AuthenticationService extends Component
 
         $response = new LoginRequestResponse();
         $settings = Sesame::getInstance()->getSettings();
-        $config = Craft::$app->config->getConfigFromFile('allowed-hosts');
+        $config = Craft::$app->config->getConfigFromFile('sesame');
         $allowedHosts = array_merge($config['allowedHosts'] ?? [], $settings->getAllowedHosts());
 
         $event = new RegisterAllowedHostsEvent([

@@ -34,7 +34,7 @@
             {% if logoSource.type == 'asset' %}
                 {% set elements = craft.assets().id(logoSource.elements ?? []).all() %}
                 {{ forms.elementSelectField({
-                    label: 'Select logo file',
+                    label: 'Select logo file' | t('sesame'),
                     id: 'logoId',
                     name: 'logoId',
                     elements: elements,
