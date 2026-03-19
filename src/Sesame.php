@@ -33,7 +33,6 @@ class Sesame extends Plugin
     public string $schemaVersion = '1.0.0';
     public bool $hasCpSettings = true;
     public CmsEdition $minCmsEdition = CmsEdition::Pro;
-    public string $minVersionRequired = '5.0.0';
 
     public static function config(): array
     {
