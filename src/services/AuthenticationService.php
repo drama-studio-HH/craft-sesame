@@ -106,7 +106,7 @@ class AuthenticationService extends Component
 
             // allow other plugins to make modifications to the sent mail
             $this->trigger(self::EVENT_BEFORE_SEND_MAIL_EVENT, $mailEvent);
-            $mail = $mailEvent->email;
+            $mail = $mailEvent->mail;
 
             $mail->send();
 
