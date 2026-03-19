@@ -6,6 +6,7 @@ use Craft;
 use craft\elements\User;
 use DateTime;
 use thedrama\craftsesame\events\EmailEvent;
+use thedrama\craftsesame\events\LoginEvent;
 use thedrama\craftsesame\events\MailEvent;
 use thedrama\craftsesame\events\ModifyTemplateEvent;
 use thedrama\craftsesame\events\RegisterAllowedHostsEvent;
@@ -21,6 +22,7 @@ class AuthenticationService extends Component
     public const EVENT_REGISTER_ALLOWED_HOSTS_EVENT = 'registerAllowedHosts';
     public const EVENT_MODIFY_TEMPLATE_EVENT = 'modifyTemplate';
     public const EVENT_BEFORE_SEND_MAIL_EVENT = 'beforeSendMail';
+    public const EVENT_AFTER_LOGIN_EVENT = 'afterLogin';
 
     // use Craft's random string method for generating tokens, for URL tokens and for user passwords
     public function getToken(int $length = 32): string
@@ -148,6 +150,15 @@ class AuthenticationService extends Component
 
         $success = Craft::$app->getUser()->login($user);
 
+        $loginEvent = new LoginEvent([
+            'user' => $user,
+            'success' => $success,
+        ]);
+
+        // let plugins decide if the login attempt should be successful or not
+        $this->trigger(self::EVENT_AFTER_LOGIN_EVENT, $loginEvent);
+        $success = $loginEvent->success;
+
         if ($success) {
             $authRecord->tokenUsed = true;
             $authRecord->save(false);
@@ -157,6 +168,11 @@ class AuthenticationService extends Component
                 Craft::$app->getUsers()->activateUser($user);
             }
             return true;
+        }
+
+        // log the user out if they were successfully logged in but deemed a failure by an event
+        if (Craft::$app->getUser()->getIdentity()) {
+            Craft::$app->getUser()->logout();
         }
 
         // TODO: decide if logging the user in but failing to do so should consume the token
