@@ -6,5 +6,5 @@ use craft\base\Event;
 
 class MailEvent extends Event
 {
-    public mixed $email = null;
+    public mixed $mail = null;
 }
