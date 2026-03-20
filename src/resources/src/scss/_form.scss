@@ -5,7 +5,7 @@
   &.float-labels {
     .field {
       .input {
-        padding-top: 0.5rem !important;
+        padding-top: $inputPaddingTop !important;
       }
     }
   }
@@ -68,7 +68,7 @@
     input {
       @extend .regular;
       width: 100%;
-      padding: $inputPaddingTop $inputPaddingX $inputPaddingBottom;
+      padding: 0.5rem $inputPaddingX $inputPaddingBottom;
       font-size: $labelSizeDefault;
       border: 1px solid $borderColor;
       border-radius: $borderRadius;
