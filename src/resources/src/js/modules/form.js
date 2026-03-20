@@ -1,7 +1,7 @@
 import Toastify from 'toastify-js';
 
 function initFloatingLabelFallback() {
-    const inputs = document.querySelectorAll('.field input');
+    const inputs = document.querySelectorAll('.sesame-login-container .field input');
 
     inputs.forEach(function (input) {
         updateHasValue(input);
@@ -40,7 +40,7 @@ function clearError(input, errorEl) {
 }
 
 function initFormValidation() {
-    const form = document.querySelector('.form');
+    const form = document.querySelector('.sesame-login-container .form');
     if (!form) {
         return;
     }
