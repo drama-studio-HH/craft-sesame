@@ -1,0 +1,23 @@
+@use "variables" as *;
+@use "sass:string";
+
+// generate @font-face annotations and classes
+$fonts: ("Thin": 100, "Light": 300, "Regular": 400, "Medium": 500, "Bold": 700, "ExtraBold": 800, "Black": 900);
+
+// class base
+.base {
+  font-family: "M PLUS Rounded 1c";
+  color: $textColor;
+}
+
+@each $name, $weight in $fonts {
+  @font-face {
+    font-family: "M PLUS Rounded 1c";
+    src: url("../fonts/MPLUSRounded1c-#{$name}.ttf");
+    font-weight: $weight;
+  }
+  .#{string.to-lower-case($name)} {
+    @extend .base;
+    font-weight: $weight;
+  }
+}

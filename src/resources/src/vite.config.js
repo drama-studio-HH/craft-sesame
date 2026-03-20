@@ -12,6 +12,7 @@ export default defineConfig({
             makeAbsoluteExternalsRelative: true,
             input: {
                 frontend: resolve(__dirname, 'js/frontend.js'),
+                form: resolve(__dirname, 'js/form.js'),
             },
             output: {
                 manualChunks: (id) => {

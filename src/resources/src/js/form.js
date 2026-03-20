@@ -1,5 +1,5 @@
 import {initFloatingLabelFallback, initFormValidation, initToasts} from "./modules/form.js";
-import '../scss/frontend.scss';
+import "../scss/_form.scss";
 
 document.addEventListener('DOMContentLoaded', () => {
     initFloatingLabelFallback();

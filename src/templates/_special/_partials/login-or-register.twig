@@ -1,24 +1,28 @@
+{% do view.registerAssetBundle('thedrama\\craftsesame\\assetbundles\\FormAsset') %}
+
 <div class="sesame-login-container">
-    <div class="logo">
-        <img src="{{ craft.sesame.logoUrl }}">
-    </div>
-    <span>
-        {{ 'Please login, or register, by entering your email. Please note that registration is only open to specific email domains.'|t('sesame') }}
-    </span>
-    <form class="form" method="post">
-        {{ actionInput('sesame/sesame/register') }}
-        {{ csrfInput() }}
-
-        <div class="field">
-            {{ input('text', 'email', null, {
-                id: 'email',
-                placeholder: ' ',
-                'aria-required': 'true',
-                autocomplete: 'email'
-            }) }}
-            <label for="email">{{ 'Your email'|t('sesame') }}</label>
+    <div class="content">
+        <div class="logo">
+            <img src="{{ craft.sesame.logoUrl }}">
         </div>
+        <span>
+            {{ 'Please login, or register, by entering your email. Please note that registration is only open to specific email domains.'|t('sesame') }}
+        </span>
+        <form class="form" method="post">
+            {{ actionInput('sesame/sesame/register') }}
+            {{ csrfInput() }}
 
-        <button type="submit" class="btn">{{ 'Request Login Link'|t('sesame') }}</button>
-    </form>
+            <div class="field">
+                {{ input('text', 'email', null, {
+                    id: 'email',
+                    placeholder: ' ',
+                    'aria-required': 'true',
+                    autocomplete: 'email'
+                }) }}
+                <label for="email">{{ 'Your email'|t('sesame') }}</label>
+            </div>
+
+            <button type="submit" class="btn">{{ 'Request Login Link'|t('sesame') }}</button>
+        </form>
+    </div>
 </div>
