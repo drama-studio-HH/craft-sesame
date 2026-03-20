@@ -2,6 +2,15 @@
 @use "fonts";
 
 .sesame-login-container {
+
+  @extend .regular;
+  background-color: $bodyBgColor;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+
   .content {
     background-color: $contentBgColor;
     padding: 2rem;
