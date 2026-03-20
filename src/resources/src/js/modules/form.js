@@ -1,7 +1,7 @@
 import Toastify from 'toastify-js';
 
 function initFloatingLabelFallback() {
-    const inputs = document.querySelectorAll('.sesame-login-container .field input');
+    const inputs = document.querySelectorAll('.sesame-login-container.float-labels .field input');
 
     inputs.forEach(function (input) {
         updateHasValue(input);

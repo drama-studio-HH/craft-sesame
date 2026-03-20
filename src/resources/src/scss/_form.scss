@@ -81,7 +81,7 @@
         box-shadow: none;
       }
 
-      &:focus + label, &:not(:placeholder-shown) + label, .has-value + label {
+      &.float-labels:focus + label, &.float-labels:not(:placeholder-shown) + label, &.float-labels.has-value + label {
         top: $labelTopFloat;
         transform: translateY(0);
         font-size: $labelSizeFloat;
