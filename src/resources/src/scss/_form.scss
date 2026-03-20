@@ -6,6 +6,13 @@
     .field {
       .input {
         padding-top: $inputPaddingTop !important;
+        &:focus + label, &:not(:placeholder-shown) + label, &.has-value + label {
+          top: $labelTopFloat;
+          transform: translateY(0);
+          font-size: $labelSizeFloat;
+          font-weight: 600;
+          color: $labelColorFloat;
+        }
       }
     }
   }
@@ -86,14 +93,6 @@
         outline: 3px solid $borderFocusColor;
         outline-offset: 2px;
         box-shadow: none;
-      }
-
-      &.float-labels:focus + label, &.float-labels:not(:placeholder-shown) + label, &.float-labels.has-value + label {
-        top: $labelTopFloat;
-        transform: translateY(0);
-        font-size: $labelSizeFloat;
-        font-weight: 600;
-        color: $labelColorFloat;
       }
 
       &[aria-invalid="true"] {
