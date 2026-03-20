@@ -1,6 +1,8 @@
 {% do view.registerAssetBundle('thedrama\\craftsesame\\assetbundles\\FormAsset') %}
 
-<div class="sesame-login-container{% if applyFloatLabels is defined and applyFloatLabels == true %} float-labels{% endif %}">
+{% set applyFloatLabels = applyFloatLabels ?? true %}
+
+<div class="sesame-login-container{% if applyFloatLabels %} float-labels{% endif %}">
     <div class="content">
         <div class="logo">
             <img src="{{ craft.sesame.logoUrl }}">
@@ -15,11 +17,11 @@
             <div class="field">
                 {{ input('text', 'email', null, {
                     id: 'email',
-                    placeholder: ' ',
+                    placeholder: applyFloatLabels ? ' ' : 'Your email'|t('sesame'),
                     'aria-required': 'true',
                     autocomplete: 'email'
                 }) }}
-                <label for="email">{{ 'Your email'|t('sesame') }}</label>
+                {% if applyFloatLabels %}<label for="email">{{ 'Your email'|t('sesame') }}</label>{% endif %}
             </div>
 
             <button type="submit" class="btn">{{ 'Request Login Link'|t('sesame') }}</button>

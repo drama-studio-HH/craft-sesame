@@ -2,6 +2,13 @@
 @use "fonts";
 
 .sesame-login-container {
+  &.float-labels {
+    .field {
+      .input {
+        padding-top: 0.5rem !important;
+      }
+    }
+  }
 
   @extend .regular;
   display: flex;
