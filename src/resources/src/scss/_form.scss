@@ -4,7 +4,7 @@
 .sesame-login-container {
   &.float-labels {
     .field {
-      .input {
+      input {
         padding-top: $inputPaddingTop !important;
         &:focus + label, &:not(:placeholder-shown) + label, &.has-value + label {
           top: $labelTopFloat;
