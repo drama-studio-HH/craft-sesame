@@ -3,7 +3,7 @@
 namespace thedrama\craftsesame\events;
 
 use craft\base\Event;
-use craft\web\User;
+use craft\elements\User;
 
 class LoginEvent extends Event
 {
