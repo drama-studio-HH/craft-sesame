@@ -28,7 +28,7 @@ class SesameController extends Controller
         $authService = Sesame::getInstance()->authenticationService;
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return $this->renderTemplate('sesame/register-failure');
+            return $this->redirectToPostedUrl(null, 'sesame/register-failure');
         }
 
         // check if the user is allowed to register
@@ -51,10 +51,10 @@ class SesameController extends Controller
             // persist the authentication request in the database
             $authService->storeAuth($email);
 
-            return $this->renderTemplate('sesame/register-success');
+            return $this->redirectToPostedUrl(null, 'sesame/register-success');
         }
 
-        return $this->renderTemplate( 'sesame/register-failure');
+        return $this->redirectToPostedUrl(null, 'sesame/register-failure');
     }
 
     public function actionLogin(string $token): ?Response
