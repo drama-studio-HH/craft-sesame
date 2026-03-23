@@ -30,6 +30,7 @@ class SettingsService extends Component
         $site = Craft::$app->getSites()->getCurrentSite() ?? Craft::$app->getSites()->getPrimarySite();
 
         $defaultRecord = new SettingsRecord([
+            'allowUserRegistration' => true,
             'siteId' => $site->id,
             'logoSource' => '{"type":"asset"}',
             'lifetime' => 15 * 60,
