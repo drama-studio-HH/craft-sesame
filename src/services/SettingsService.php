@@ -44,7 +44,7 @@ class SettingsService extends Component
     {
         $settingsRecord = $this->getSettingsRecord();
 
-        $settingsRecord->allowUserRegistration = $settings['allowUserRegistration'];
+        $settingsRecord->allowUserRegistration = (bool)$settings['allowUserRegistration'];
 
         $settingsRecord->allowedHosts = $settings['allowedHosts'];
 
