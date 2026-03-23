@@ -38,6 +38,13 @@ class AuthenticationService extends Component
 
         $response = new LoginRequestResponse();
         $settings = Sesame::getInstance()->getSettings();
+
+        // if the email does not have an associated user, and user registration is not allowed, fail
+        if (!$user && !$settings->allowUserRegistration) {
+            $response->success = false;
+            return $response;
+        }
+
         $config = Craft::$app->config->getConfigFromFile('sesame');
         $allowedHosts = array_merge($config['allowedHosts'] ?? [], $settings->getAllowedHosts());
 

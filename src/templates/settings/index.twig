@@ -18,6 +18,15 @@
         <h2>{{ 'General Settings'|t('sesame') }}</h2>
 
         {% namespace 'settings' %}
+            {{ forms.lightswitchField({
+                label: 'Allow user registration' | t('sesame'),
+                instructions: 'Whether new users should be allowed to register using the login form or not.' | t('sesame'),
+                id: 'allowUserRegistration',
+                name: 'allowUserRegistration',
+                on: settings.allowUserRegistration,
+                errors: settings.getErrors('allowUserRegistration'),
+            }) }}
+
             {{ forms.textAreaField({
                 first: true,
                 label: 'Allowed hosts' | t('sesame'),

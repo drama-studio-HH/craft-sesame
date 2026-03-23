@@ -16,6 +16,7 @@ class SettingsService extends Component
     {
         $settingsRecord = $this->getSettingsRecord();
         return new Settings([
+            'allowUserRegistration' => $settingsRecord->allowUserRegistration,
             'allowedHosts' => $settingsRecord->allowedHosts,
             'logoSource' => $settingsRecord->logoSource,
             'lifetime' => $settingsRecord->lifetime,
@@ -41,6 +42,8 @@ class SettingsService extends Component
     public function saveSettings(array $settings): bool
     {
         $settingsRecord = $this->getSettingsRecord();
+
+        $settingsRecord->allowUserRegistration = $settings['allowUserRegistration'];
 
         $settingsRecord->allowedHosts = $settings['allowedHosts'];
 

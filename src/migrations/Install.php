@@ -46,6 +46,7 @@ class Install extends Migration
         $this->createTable(Table::SETTINGS, [
             'id' => $this->primaryKey(),
             'siteId' => $this->integer()->notNull(),
+            'allowUserRegistration' => $this->boolean()->notNull()->defaultValue(true),
             'allowedHosts' => $this->string(),
             'logoSource' => $this->json()->notNull(),
             'lifetime' => $this->integer()->notNull()->defaultValue(15 * 60),

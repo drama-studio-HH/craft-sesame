@@ -7,6 +7,7 @@ use craft\helpers\Json;
 
 class Settings extends Model
 {
+    public bool $allowUserRegistration = true;
     public array|string|null $allowedHosts = [];
     // TODO: the logo source should be able to be configured to a static URL instead of an asset
     // for now, the logo is either the Sesame logo, or a user-uploaded Asset
