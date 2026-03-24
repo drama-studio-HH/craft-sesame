@@ -1,6 +1,7 @@
 {% do view.registerAssetBundle('thedrama\\craftsesame\\assetbundles\\FormAsset') %}
 
 {% set applyFloatLabels = applyFloatLabels ?? true %}
+{% set renderFlashes = renderFlashes ?? false %}
 
 <div class="sesame-login-container{% if applyFloatLabels %} float-labels{% endif %}">
     <div class="content">
@@ -27,4 +28,14 @@
             <button type="submit" class="btn">{{ 'Request Login Link'|t('sesame') }}</button>
         </form>
     </div>
+    {% if renderFlashes %}
+        <div class="toast-container">
+            {% set flashes = craft.app.session.getAllFlashes(true) %}
+            {% for key, message in flashes %}
+                <span class="toast" data-toast-key="{{ key }}">
+                    {{ message }}
+                </span>
+            {% endfor %}
+        </div>
+    {% endif %}
 </div>

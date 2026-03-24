@@ -18,8 +18,8 @@ class Sesame
         return SesamePlugin::getInstance()->settingsService->getLogoUrl();
     }
 
-    public function renderLoginForm(mixed $applyFloatLabels = true): Markup
+    public function renderLoginForm(mixed $applyFloatLabels = true, mixed $renderFlashes = false): Markup
     {
-        return SesamePlugin::getInstance()->renderService->renderLoginForm((bool)$applyFloatLabels);
+        return SesamePlugin::getInstance()->renderService->renderLoginForm((bool)$applyFloatLabels, (bool)$renderFlashes);
     }
 }
