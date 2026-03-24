@@ -1,7 +1,6 @@
 @use "variables" as *;
 @use "fonts";
 @use "form";
-@use "toastify-js/src/toastify.css";
 
 body {
   @extend .regular;

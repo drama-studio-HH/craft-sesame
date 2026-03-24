@@ -1,5 +1,6 @@
 @use "variables" as *;
 @use "fonts";
+@use "toastify-js/src/toastify.css";
 
 .sesame-login-container {
   &.float-labels {

@@ -51,10 +51,14 @@ class SesameController extends Controller
             // persist the authentication request in the database
             $authService->storeAuth($email);
 
-            return $this->redirectToPostedUrl(null, 'sesame/register-success');
+            Craft::$app->getSession()->setFlash('register__success', Craft::t('sesame', 'Your login request was handled successfully. If an account with the specified email exists, a mail will be sent to it.'));
+
+            return $this->redirectToPostedUrl();
         }
 
-        return $this->redirectToPostedUrl(null, 'sesame/register-failure');
+        Craft::$app->getSession()->setFlash('register__danger', Craft::t('sesame', 'Unfortunately we could not process your request. Please try again later, or with a different mail.'));
+
+        return $this->redirectToPostedUrl();
     }
 
     public function actionLogin(string $token): ?Response
