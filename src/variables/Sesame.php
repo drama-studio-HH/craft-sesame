@@ -22,6 +22,11 @@ class Sesame
     {
         $applyFloatLabels = $options['applyFloatLabels'] ?? true;
         $renderFlashes = $options['renderFlashes'] ?? false;
-        return SesamePlugin::getInstance()->renderService->renderLoginForm($applyFloatLabels, $renderFlashes);
+        $toastBg = $options['toastBg'] ?? '';
+        return SesamePlugin::getInstance()->renderService->renderLoginForm([
+            'applyFloatLabels' => $applyFloatLabels,
+            'renderFlashes' => $renderFlashes,
+            'toastBg' => $toastBg,
+        ]);
     }
 }

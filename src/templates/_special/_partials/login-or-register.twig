@@ -2,6 +2,7 @@
 
 {% set applyFloatLabels = applyFloatLabels ?? true %}
 {% set renderFlashes = renderFlashes ?? false %}
+{% set toastBg = toastBg ?? '' %}
 
 <div class="sesame-login-container{% if applyFloatLabels %} float-labels{% endif %}">
     <div class="content">
@@ -32,7 +33,7 @@
         <div class="toast-container">
             {% set flashes = craft.app.session.getAllFlashes(true) %}
             {% for key, message in flashes %}
-                <span class="toast" data-toast-key="{{ key }}">
+                <span class="toast" data-toast-key="{{ key }}"{% if toastBg %} data-toast-bg="{{ toastBg }}"{% endif %}>
                     {{ message }}
                 </span>
             {% endfor %}

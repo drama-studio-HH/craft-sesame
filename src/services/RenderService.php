@@ -10,12 +10,9 @@ use Twig\Markup;
 class RenderService extends Component
 {
     // render the login form as Twig Markup
-    public function renderLoginForm(bool $applyFloatLabels = true, bool $renderFlashes = false): Markup
+    public function renderLoginForm(array $variables): Markup
     {
-        $template = Craft::$app->getView()->renderTemplate('sesame/_partials/login-or-register', [
-            'applyFloatLabels' => $applyFloatLabels,
-            'renderFlashes' => $renderFlashes,
-        ]);
+        $template = Craft::$app->getView()->renderTemplate('sesame/_partials/login-or-register', $variables);
         return Template::raw($template);
     }
 }

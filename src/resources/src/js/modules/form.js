@@ -99,10 +99,14 @@ function initToasts() {
     }
     const toasts = toastContainer.querySelectorAll('.toast');
     toasts.forEach(toast => {
+        const toastBg = toast.dataset.toastBg;
         const toastKey = toast.dataset.toastKey;
         const [_, bsClass] = toastKey.split('__');
         Toastify({
             className: `bg-${bsClass}`,
+            style: {
+                background: toastBg,
+            },
             node: toast,
             duration: 10000,
             close: true,
