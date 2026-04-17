@@ -76,6 +76,8 @@ class SettingsService extends Component
     {
         $settings = $this->getSettings();
         $sitesService = Craft::$app->getSites();
-        return $settings->redirectUrl ?? ($sitesService->currentSite ?? $sitesService->primarySite)->baseUrl;
+        $generalConfig = Craft::$app->getConfig()->getGeneral();
+        $redirectUrl = $generalConfig->getPostLoginRedirect();
+        return $settings->redirectUrl ?? ($redirectUrl == '' ? ($sitesService->currentSite ?? $sitesService->primarySite)->baseUrl : $redirectUrl);
     }
 }
