@@ -116,6 +116,32 @@ function initToasts() {
     });
 }
 
+function initResendMail() {
+    const resendMailLink = document.querySelector('.resend-mail');
+    const countdownEl = document.querySelector('.resend-countdown');
+    if (resendMailLink && countdownEl) {
+        countdownEl.innerHTML = '60s';
+        const now = Date.now();
+        resendMailLink.addEventListener('click', () => {
+            const diff = Date.now() - now;
+            if (diff >= 60 * 1000) {
+                resendMailLink.classList.remove('disabled');
+                const form = resendMailLink.closest('form');
+                form.submit();
+            }
+        });
+    }
+    const interval = setInterval(() => {
+        const current = countdownEl.innerHTML.replace('s', '');
+        if (current > 1) {
+            countdownEl.innerHTML = `${current - 1}s`;
+        } else {
+            countdownEl.innerHTML = '';
+            clearInterval(interval);
+        }
+    }, 1000);
+}
+
 export {
     initFormValidation,
     initFloatingLabelFallback,

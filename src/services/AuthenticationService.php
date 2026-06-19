@@ -5,16 +5,14 @@ namespace thedrama\craftsesame\services;
 use Craft;
 use craft\elements\User;
 use DateTime;
-use thedrama\craftsesame\events\EmailEvent;
 use thedrama\craftsesame\events\LoginEvent;
 use thedrama\craftsesame\events\MailEvent;
 use thedrama\craftsesame\events\ModifyTemplateEvent;
 use thedrama\craftsesame\events\RegisterAllowedHostsEvent;
-use thedrama\craftsesame\Sesame;
-use thedrama\craftsesame\models\AuthenticationData;
 use thedrama\craftsesame\models\AuthenticationResponse;
 use thedrama\craftsesame\models\LoginRequestResponse;
 use thedrama\craftsesame\records\AuthenticationRecord;
+use thedrama\craftsesame\Sesame;
 use yii\base\Component;
 
 class AuthenticationService extends Component

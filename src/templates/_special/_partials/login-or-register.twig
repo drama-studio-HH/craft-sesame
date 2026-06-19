@@ -32,10 +32,13 @@
                 <label for="email">{{ 'Your email'|t('sesame') }}</label>
             </div>
 
-            <button type="submit" class="btn">{{ 'Request Login Link'|t('sesame') }}</button>
+            <button type="submit" class="btn{{ mail ? ' disabled' }}"{% if mail %} disabled{% endif %}>{{ 'Request Login Link'|t('sesame') }}</button>
 
             {% if mail %}
-                <span><a href="#" class="resend-mail">{{ 'Didn\'t receive an email? Resend the mail.'|t('sesame') }}</a></span>
+                <span>
+                    <a href="#" class="resend-mail disabled">{{ 'Didn\'t receive an email? Resend the mail.'|t('sesame') }}</a>
+                    <span class="resend-countdown"></span>
+                </span>
                 {{ hiddenInput('previousEmail', mail) }}
             {% endif %}
         </form>

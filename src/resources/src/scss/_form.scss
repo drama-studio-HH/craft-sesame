@@ -79,6 +79,11 @@
         outline-offset: 3px;
       }
     }
+
+    .resend-mail {
+      @extend .regular;
+      color: $labelColorDefault;
+    }
   }
 
   .field {
