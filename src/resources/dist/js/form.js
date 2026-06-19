@@ -1,1 +1,1 @@
-import"./vendor.js";import{n as e,r as t,t as n}from"./form2.js";document.addEventListener(`DOMContentLoaded`,()=>{n(),e(),t()});
+import"./vendor.js";import{i as e,n as t,r as n,t as r}from"./form2.js";document.addEventListener(`DOMContentLoaded`,()=>{r(),t(),e(),n()});

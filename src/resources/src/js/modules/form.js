@@ -146,4 +146,5 @@ export {
     initFormValidation,
     initFloatingLabelFallback,
     initToasts,
+    initResendMail,
 };
