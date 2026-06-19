@@ -27,7 +27,7 @@
                     placeholder: applyFloatLabels ? ' ' : 'Your email'|t('sesame'),
                     'aria-required': 'true',
                     autocomplete: 'email',
-                    disabled: mail|length
+                    disabled: mail|length ? true : false
                 }) }}
                 <label for="email">{{ 'Your email'|t('sesame') }}</label>
             </div>
