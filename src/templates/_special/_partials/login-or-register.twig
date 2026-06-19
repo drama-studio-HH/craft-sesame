@@ -9,8 +9,13 @@
         <div class="logo">
             <img src="{{ craft.sesame.logoUrl }}">
         </div>
+        {% set mail = craft.app.session.getFlash('mail', '', true) %}
         <span>
-            {{ 'Please login, or register, by entering your email. Please note that registration is only open to specific email domains.'|t('sesame') }}
+            {% if mail %}
+                {{ 'Your login request was handled successfully. If an account with the specified email exists, a mail will be sent to it.'|t('sesame') }}
+            {% else %}
+                {{ 'Please login, or register, by entering your email. Please note that registration is only open to specific email domains.'|t('sesame') }}
+            {% endif %}
         </span>
         <form class="form" method="post">
             {{ actionInput('sesame/sesame/register') }}
@@ -21,12 +26,18 @@
                     id: 'email',
                     placeholder: applyFloatLabels ? ' ' : 'Your email'|t('sesame'),
                     'aria-required': 'true',
-                    autocomplete: 'email'
+                    autocomplete: 'email',
+                    disabled: mail|length
                 }) }}
                 <label for="email">{{ 'Your email'|t('sesame') }}</label>
             </div>
 
             <button type="submit" class="btn">{{ 'Request Login Link'|t('sesame') }}</button>
+
+            {% if mail %}
+                <span><a href="#" class="resend-mail">{{ 'Didn\'t receive an email? Resend the mail.'|t('sesame') }}</a></span>
+                {{ hiddenInput('previousEmail', mail) }}
+            {% endif %}
         </form>
     </div>
     {% if renderFlashes %}

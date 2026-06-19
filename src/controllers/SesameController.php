@@ -7,6 +7,7 @@ use craft\web\Controller;
 use thedrama\craftsesame\base\AlreadyLoggedInControllerTrait;
 use thedrama\craftsesame\records\AuthenticationRecord;
 use thedrama\craftsesame\Sesame;
+use yii\web\BadRequestHttpException;
 use yii\web\Response;
 
 class SesameController extends Controller
@@ -23,7 +24,14 @@ class SesameController extends Controller
     {
         $this->requirePostRequest();
 
-        $email = $this->request->getRequiredBodyParam('email');
+        $email = $this->request->getBodyParam('email');
+        if (!$email) {
+            $email = $this->request->getBodyParam('previousEmail');
+        }
+
+        if (!$email) {
+            throw new BadRequestHttpException("Request missing required body param");
+        }
 
         $authService = Sesame::getInstance()->authenticationService;
 
@@ -52,6 +60,7 @@ class SesameController extends Controller
             $authService->storeAuth($email);
 
             Craft::$app->getSession()->setFlash('register__success', Craft::t('sesame', 'Your login request was handled successfully. If an account with the specified email exists, a mail will be sent to it.'));
+            Craft::$app->getSession()->setFlash('mail', $email);
 
             return $this->redirectToPostedUrl();
         }
