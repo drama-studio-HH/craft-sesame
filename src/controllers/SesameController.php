@@ -84,7 +84,7 @@ class SesameController extends Controller
         $loginResponse = $authService->handleAuthRequest($authRecord);
 
         if ($loginResponse->success) {
-            return $this->renderTemplate('sesame/login', ['token' => $token]);
+            return $this->renderTemplate('sesame/login', ['token' => $token, 'renderFlashes' => false]);
         } else {
             // if we have any errors, they will be passed to the template
             return $this->renderTemplate('sesame/login-failure', ['errors' => $loginResponse->errors]);
