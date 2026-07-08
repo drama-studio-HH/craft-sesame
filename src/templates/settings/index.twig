@@ -27,6 +27,19 @@
                 errors: settings.getErrors('allowUserRegistration'),
             }) }}
 
+            {{ forms.selectField({
+                label: "Login Strategy"|t("sesame"),
+                instructions: "Which login strategy the plugin should use, either one-time links (default) or code input." |t("sesame"),
+                id: "strategy",
+                name: "strategy",
+                options: {
+                    "token": "One-Time Links"|t("sesame"),
+                    "code": "Code Input"|t("sesame"),
+                },
+                value: settings.strategy,
+                errors: settings.getErrors("strategy"),
+            }) }}
+
             {{ forms.textAreaField({
                 first: true,
                 label: 'Allowed hosts' | t('sesame'),
@@ -64,7 +77,7 @@
             {{ forms.textField({
                 type: 'number',
                 label: 'Token Lifetime (in seconds)' | t('sesame'),
-                instructions: 'Enter the lifetime of the tokens Sesame sends out, in seconds. Defaults to 900 seconds (15 minutes).' | t('sesame'),
+                instructions: 'Enter the lifetime of the tokens Sesame sends out, in seconds. Defaults to 900 seconds (15 minutes). If Sesame sends codes instead of one-time links, this setting will have no effect.' | t('sesame'),
                 name: 'lifetime',
                 size: 4,
                 placeholder: 900,

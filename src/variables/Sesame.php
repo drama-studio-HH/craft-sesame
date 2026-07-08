@@ -23,10 +23,12 @@ class Sesame
         $applyFloatLabels = $options['applyFloatLabels'] ?? true;
         $renderFlashes = $options['renderFlashes'] ?? false;
         $toastBg = $options['toastBg'] ?? '';
+        $strategy = $options['strategy'] ?? 'token';
         return SesamePlugin::getInstance()->renderService->renderLoginForm([
             'applyFloatLabels' => $applyFloatLabels,
             'renderFlashes' => $renderFlashes,
             'toastBg' => $toastBg,
+            'strategy' => $strategy,
         ]);
     }
 }

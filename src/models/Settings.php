@@ -15,6 +15,8 @@ class Settings extends Model
     // lifetime, in seconds
     public int $lifetime = 15 * 60;
     public ?string $redirectUrl;
+    // strategy can be either "token" or "code"
+    public string $strategy;
 
     // some settings are configured as multiline strings
     // credit: https://github.com/verbb/knock-knock/blob/craft-5/src/models/Settings.php#L77

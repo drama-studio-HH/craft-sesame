@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ 'Your login link'|t('sesame') }}</title>
+    <title>{{ 'Your login code'|t('sesame') }}</title>
 </head>
 <body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif;">
 
@@ -37,24 +37,21 @@
                         <tr>
                             <td style="direction:ltr; font-size:0px; padding:20px 40px; text-align:left;">
                                 <div style="font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; color: #333333;">
-                                    <h1 style="font-size: 24px; font-weight: bold; margin-top: 0; margin-bottom: 20px; color: #111111;">{{ 'Your secure login link'|t('sesame') }}</h1>
+                                    <h1 style="font-size: 24px; font-weight: bold; margin-top: 0; margin-bottom: 20px; color: #111111;">{{ 'Your login code'|t('sesame') }}</h1>
                                     <p style="margin: 0 0 15px 0;">{{ 'Hello'|t('sesame') }},</p>
-                                    <p style="margin: 0 0 25px 0;">{{ 'click the link below to securely log into your account. This link is only valid for a short time and can only be used once.'|t('sesame') }}</p>
+                                    <p style="margin: 0 0 25px 0;">{{ 'enter the following code to log in to your user account. This code is only valid for a short time and can only be used once.'|t('sesame') }}</p>
 
                                     <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate; line-height:100%;">
                                         <tr>
                                             <td align="center" bgcolor="#007bff" role="presentation" style="border:none; border-radius:3px; cursor:auto; mso-padding-alt:10px 25px; background:#007bff;" valign="middle">
-                                                <a href="{{ siteUrl('/sesame/' ~ token) }}" style="display:inline-block; background:#007bff; color:#ffffff; font-family:Arial, sans-serif; font-size:16px; font-weight:bold; line-height:120%; margin:0; text-decoration:none; text-transform:none; padding:10px 25px; mso-padding-alt:0px; border-radius:3px;" target="_blank">
-                                                    {{ 'Secure login'|t('sesame') }}
-                                                </a>
+                                                <span style="font-size: 32px; font-weight: bolder;">
+                                                    {{ code }}
+                                                </span>
                                             </td>
                                         </tr>
                                     </table>
 
-                                    <p style="margin: 25px 0 15px 0;">{{ 'If the above button does not work, please copy the URL below and paste it into your browser\'s URL bar:'|t('sesame') }}</p>
-                                    <p style="margin: 0; word-break: break-all;">
-                                        {{ siteUrl('/sesame/' ~ token) }}
-                                    </p>
+                                    <p style="margin: 25px 0 15px 0;">{{ 'If the above code does not work, please try again, or contact the site\'s administrator.'|t('sesame') }}</p>
                                 </div>
                             </td>
                         </tr>

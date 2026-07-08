@@ -130,16 +130,16 @@ function initResendMail() {
                 form.submit();
             }
         });
+        const interval = setInterval(() => {
+            const current = countdownEl.innerHTML.replace('s', '');
+            if (current > 1) {
+                countdownEl.innerHTML = `${current - 1}s`;
+            } else {
+                countdownEl.innerHTML = '';
+                clearInterval(interval);
+            }
+        }, 1000);
     }
-    const interval = setInterval(() => {
-        const current = countdownEl.innerHTML.replace('s', '');
-        if (current > 1) {
-            countdownEl.innerHTML = `${current - 1}s`;
-        } else {
-            countdownEl.innerHTML = '';
-            clearInterval(interval);
-        }
-    }, 1000);
 }
 
 export {

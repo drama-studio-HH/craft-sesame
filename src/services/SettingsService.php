@@ -21,6 +21,7 @@ class SettingsService extends Component
             'logoSource' => $settingsRecord->logoSource,
             'lifetime' => $settingsRecord->lifetime,
             'redirectUrl' => $settingsRecord->redirectUrl,
+            'strategy' => $settingsRecord->strategy,
         ]);
     }
 
@@ -34,6 +35,7 @@ class SettingsService extends Component
             'siteId' => $site->id,
             'logoSource' => '{"type":"asset"}',
             'lifetime' => 15 * 60,
+            'strategy' => 'token',
         ]);
 
         return SettingsRecord::findOne(['siteId' => $site->id]) ?? $defaultRecord;
@@ -56,6 +58,8 @@ class SettingsService extends Component
         $settingsRecord->lifetime = $settings['lifetime'];
 
         $settingsRecord->redirectUrl = $settings['redirectUrl'];
+
+        $settingsRecord->strategy = $settings['strategy'];
 
         return $settingsRecord->save();
     }

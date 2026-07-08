@@ -3,6 +3,7 @@
 {% set applyFloatLabels = applyFloatLabels ?? true %}
 {% set renderFlashes = renderFlashes ?? false %}
 {% set toastBg = toastBg ?? '' %}
+{% set strategy = strategy ?? 'token' %}
 
 <div class="sesame-login-container{% if applyFloatLabels %} float-labels{% endif %}">
     <div class="content">
@@ -18,19 +19,35 @@
             {% endif %}
         </span>
         <form class="form" method="post">
-            {{ actionInput('sesame/sesame/register') }}
+            {% if strategy == 'token' %}
+                {{ actionInput('sesame/sesame/register') }}
+            {% elseif strategy == 'code' and mail %}
+                {{ actionInput('sesame/sesame/code-input') }}
+            {% endif %}
             {{ csrfInput() }}
 
-            <div class="field">
-                {{ input('text', 'email', null, {
-                    id: 'email',
-                    placeholder: applyFloatLabels ? ' ' : 'Your email'|t('sesame'),
-                    'aria-required': 'true',
-                    autocomplete: 'email',
-                    disabled: mail|length ? true : false
-                }) }}
-                <label for="email">{{ 'Your email'|t('sesame') }}</label>
-            </div>
+            {% if strategy == 'token' %}
+                <div class="field">
+                    {{ input('text', 'email', null, {
+                        id: 'email',
+                        placeholder: applyFloatLabels ? ' ' : 'Your email'|t('sesame'),
+                        'aria-required': 'true',
+                        autocomplete: 'email',
+                        disabled: mail|length ? true : false
+                    }) }}
+                    <label for="email">{{ 'Your email'|t('sesame') }}</label>
+                </div>
+            {% elseif strategy == 'code' and mail %}
+                {# mail has been entered, switch to code input #}
+                <div class="field">
+                    {{ input('text', 'code', null, {
+                        id: 'code',
+                        placeholder: applyFloatLabels ? ' ' : 'Your code'|t('sesame'),
+                        'aria-required': 'true',
+                    }) }}
+                    <label for="code">{{ 'Your code'|t('sesame') }}</label>
+                </div>
+            {% endif %}
 
             <button type="submit" class="btn{{ mail ? ' disabled' }}"{% if mail %} disabled{% endif %}>{{ 'Request Login Link'|t('sesame') }}</button>
 
