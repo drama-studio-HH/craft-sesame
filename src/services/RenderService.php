@@ -18,7 +18,7 @@ class RenderService extends Component
 
     public function renderLoginButton(array $variables): Markup
     {
-        $template = Craft::$app->getView()->renderTemplate('sesame/login', $variables);
+        $template = Craft::$app->getView()->renderTemplate('sesame/login-now', $variables);
         return Template::raw($template);
     }
 }
