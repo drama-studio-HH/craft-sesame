@@ -1,30 +1,26 @@
 {% do view.registerAssetBundle('thedrama\\craftsesame\\assetbundles\\FormAsset') %}
 
-{% extends "sesame/_layouts/html5" %}
-
-{% block content %}
-    <div class="sesame-login-container">
-        <div class="content">
-            <div class="logo">
-                <img src="{{ craft.sesame.logoUrl }}">
-            </div>
-            <form class="form" method="post">
-                {{ actionInput('sesame/sesame/login') }}
-                {{ csrfInput() }}
-                {{ hiddenInput('token', token) }}
-
-                <button type="submit" class="btn">{{ 'Log in now'|t('sesame') }}</button>
-            </form>
+<div class="sesame-login-container">
+    <div class="content">
+        <div class="logo">
+            <img src="{{ craft.sesame.logoUrl }}">
         </div>
-        {% if renderFlashes %}
-            <div class="toast-container">
-                {% set flashes = craft.app.session.getAllFlashes(true) %}
-                {% for key, message in flashes %}
-                    <span class="toast" data-toast-key="{{ key }}"{% if toastBg %} data-toast-bg="{{ toastBg }}"{% endif %}>
+        <form class="form" method="post">
+            {{ actionInput('sesame/sesame/login') }}
+            {{ csrfInput() }}
+            {{ hiddenInput('token', token) }}
+
+            <button type="submit" class="btn">{{ 'Log in now'|t('sesame') }}</button>
+        </form>
+    </div>
+    {% if renderFlashes %}
+        <div class="toast-container">
+            {% set flashes = craft.app.session.getAllFlashes(true) %}
+            {% for key, message in flashes %}
+                <span class="toast" data-toast-key="{{ key }}"{% if toastBg %} data-toast-bg="{{ toastBg }}"{% endif %}>
                     {{ message }}
                 </span>
-                {% endfor %}
-            </div>
-        {% endif %}
-    </div>
-{% endblock %}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
