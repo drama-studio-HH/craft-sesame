@@ -21,4 +21,6 @@ return [
     'Your Login for {siteName}' => 'Your Login for {siteName}',
     'Your email' => 'Your email',
     'Your login request was handled successfully. If an account with the specified email exists, a mail will be sent to it.' => 'Your login request was handled successfully. If an account with the specified email exists, a mail will be sent to it.',
+    'Click here to log in now.' => 'Click here to log in now.',
+    'Log in now' => 'Log in now',
 ];

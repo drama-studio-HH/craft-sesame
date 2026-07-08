@@ -5,6 +5,9 @@
         <div class="logo">
             <img src="{{ craft.sesame.logoUrl }}">
         </div>
+        <span>
+            {{ 'Click here to log in now.'|t('sesame') }}
+        </span>
         <form class="form" method="post">
             {{ actionInput('sesame/sesame/login') }}
             {{ csrfInput() }}
