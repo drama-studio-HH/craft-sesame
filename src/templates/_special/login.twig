@@ -4,6 +4,7 @@
     <div>
         <form class="form" method="post">
             {{ actionInput('sesame/sesame/login') }}
+            {{ csrfInput() }}
             {{ hiddenInput('token', token) }}
 
             <button type="submit" class="btn">{{ 'Log in now'|t('sesame') }}</button>
