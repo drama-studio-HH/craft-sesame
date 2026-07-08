@@ -91,8 +91,12 @@ class SesameController extends Controller
         }
     }
 
-    public function actionLogin(string $token): ?Response
+    public function actionLogin(): ?Response
     {
+        $this->requirePostRequest();
+
+        $token = $this->request->getRequiredBodyParam('token');
+
         /** @var $authService \thedrama\craftsesame\services\AuthenticationService */
         $authService = Sesame::getInstance()->authenticationService;
 
