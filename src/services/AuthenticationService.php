@@ -149,8 +149,13 @@ class AuthenticationService extends Component
     }
 
     // log the user in, and consume the token if the login was successful
-    public function login(AuthenticationRecord $authRecord): bool
+    public function login(AuthenticationRecord $authRecord, bool $isHeadRequest = false): bool
     {
+        // prevent a HEAD request from consuming the token (such as mail scanners clicking any link)
+        if ($isHeadRequest) {
+            return true;
+        }
+
         $user = Craft::$app->getUsers()->getUserById($authRecord->userId);
 
         $success = Craft::$app->getUser()->login($user);

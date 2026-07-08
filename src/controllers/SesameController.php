@@ -33,6 +33,7 @@ class SesameController extends Controller
             throw new BadRequestHttpException("Request missing required body param");
         }
 
+        /** @var $authService \thedrama\craftsesame\services\AuthenticationService */
         $authService = Sesame::getInstance()->authenticationService;
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -72,6 +73,8 @@ class SesameController extends Controller
 
     public function actionLogin(string $token): ?Response
     {
+        $method = $this->request->getMethod();
+        /** @var $authService \thedrama\craftsesame\services\AuthenticationService */
         $authService = Sesame::getInstance()->authenticationService;
 
         $authRecord = AuthenticationRecord::findOne(['token' => $token]);
@@ -79,7 +82,7 @@ class SesameController extends Controller
         // check if we have a request with such a token
         $loginResponse = $authService->handleAuthRequest($authRecord);
 
-        if ($loginResponse->success && $authService->login($authRecord)) {
+        if ($loginResponse->success && $authService->login($authRecord, strtoupper($method) === 'HEAD')) {
             return $this->redirect($loginResponse->redirectUrl);
         } else {
             // if we have any errors, they will be passed to the template
