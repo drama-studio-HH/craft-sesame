@@ -33,8 +33,10 @@ class Sesame
     public function renderLoginButton(array $options): Markup
     {
         $token = $options['token'];
+        $renderFlashes = $options['renderFlashes'] ?? false;
         return SesamePlugin::getInstance()->renderService->renderLoginButton([
             'token' => $token,
+            'renderFlashes' => $renderFlashes,
         ]);
     }
 }
