@@ -2,8 +2,8 @@
 
 {% block content %}
     <div>
-        <form>
-            {{ actionInput('sesame/sesame/perform-login') }}
+        <form class="form" method="post">
+            {{ actionInput('sesame/sesame/login') }}
             {{ hiddenInput('token', token) }}
 
             <button type="submit" class="btn">{{ 'Log in now'|t('sesame') }}</button>
