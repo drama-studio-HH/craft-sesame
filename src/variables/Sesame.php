@@ -29,4 +29,12 @@ class Sesame
             'toastBg' => $toastBg,
         ]);
     }
+
+    public function renderLoginButton(array $options): Markup
+    {
+        $token = $options['token'];
+        return SesamePlugin::getInstance()->renderService->renderLoginButton([
+            'token' => $token,
+        ]);
+    }
 }
