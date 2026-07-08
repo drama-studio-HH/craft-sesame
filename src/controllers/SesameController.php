@@ -71,9 +71,9 @@ class SesameController extends Controller
         return $this->redirectToPostedUrl();
     }
 
-    public function actionLogin(string $token): ?Response
+    // render template for user to confirm their login
+    public function actionLoginTemplate(string $token): ?Response
     {
-        $method = $this->request->getMethod();
         /** @var $authService \thedrama\craftsesame\services\AuthenticationService */
         $authService = Sesame::getInstance()->authenticationService;
 
@@ -82,7 +82,25 @@ class SesameController extends Controller
         // check if we have a request with such a token
         $loginResponse = $authService->handleAuthRequest($authRecord);
 
-        if ($loginResponse->success && $authService->login($authRecord, strtoupper($method) === 'HEAD')) {
+        if ($loginResponse->success) {
+            return $this->renderTemplate('sesame/login', ['token' => $token]);
+        } else {
+            // if we have any errors, they will be passed to the template
+            return $this->renderTemplate('sesame/login-failure', ['errors' => $loginResponse->errors]);
+        }
+    }
+
+    public function actionLogin(string $token): ?Response
+    {
+        /** @var $authService \thedrama\craftsesame\services\AuthenticationService */
+        $authService = Sesame::getInstance()->authenticationService;
+
+        $authRecord = AuthenticationRecord::findOne(['token' => $token]);
+
+        // check if we have a request with such a token
+        $loginResponse = $authService->handleAuthRequest($authRecord);
+
+        if ($loginResponse->success && $authService->login($authRecord)) {
             return $this->redirect($loginResponse->redirectUrl);
         } else {
             // if we have any errors, they will be passed to the template

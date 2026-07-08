@@ -1,0 +1,12 @@
+{% extends "sesame/_layouts/html5" %}
+
+{% block content %}
+    <div>
+        <form>
+            {{ actionInput('sesame/sesame/perform-login') }}
+            {{ hiddenInput('token', token) }}
+
+            <button type="submit" class="btn">{{ 'Log in now'|t('sesame') }}</button>
+        </form>
+    </div>
+{% endblock %}

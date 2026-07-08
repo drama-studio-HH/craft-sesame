@@ -103,7 +103,7 @@ class Sesame extends Plugin
     private function _registerSiteRoutes(): void
     {
         Event::on(UrlManager::class, UrlManager::EVENT_REGISTER_SITE_URL_RULES, function (RegisterUrlRulesEvent $event) {
-            $event->rules['sesame/<token:[A-Za-z0-9_-]{32}>'] = 'sesame/sesame/login';
+            $event->rules['sesame/<token:[A-Za-z0-9_-]{32}>'] = 'sesame/sesame/login-template';
         });
     }
 
