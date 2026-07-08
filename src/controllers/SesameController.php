@@ -18,6 +18,7 @@ class SesameController extends Controller
     protected int|bool|array $allowAnonymous = [
         'register',
         'login',
+        'login-template',
     ];
 
     public function actionRegister(): ?Response
