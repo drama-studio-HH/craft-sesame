@@ -41,7 +41,6 @@ class Install extends Migration
             'dateUpdated' => $this->dateTime()->notNull(),
             'lifetime' => $this->integer()->notNull(),
             'tokenUsed' => $this->boolean()->notNull()->defaultValue(false),
-            'code' => $this->string(4),
         ]);
 
         $this->createTable(Table::SETTINGS, [
@@ -54,7 +53,6 @@ class Install extends Migration
             'redirectUrl' => $this->string(),
             'dateCreated' => $this->dateTime()->notNull(),
             'dateUpdated' => $this->dateTime()->notNull(),
-            'strategy' => $this->string()->notNull(),
         ]);
     }
 

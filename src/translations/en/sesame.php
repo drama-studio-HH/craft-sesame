@@ -20,10 +20,5 @@ return [
     'You are already logged in.' => 'You are already logged in.',
     'Your Login for {siteName}' => 'Your Login for {siteName}',
     'Your email' => 'Your email',
-    'Your code' => 'Your code',
     'Your login request was handled successfully. If an account with the specified email exists, a mail will be sent to it.' => 'Your login request was handled successfully. If an account with the specified email exists, a mail will be sent to it.',
-    'enter the following code to log in to your user account. This code is only valid for a short time and can only be used once.' => 'enter the following code to log in to your user account. This code is only valid for a short time and can only be used once.',
-    'Your login code' => 'Your login code',
-    'Your login link' => 'Your login link',
-    'If the above code does not work, please try again, or contact the site\'s administrator.' => 'If the above code does not work, please try again, or contact the site\'s administrator.'
 ];

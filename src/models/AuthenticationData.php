@@ -9,7 +9,6 @@ use DateTime;
 class AuthenticationData extends Model
 {
     public string $token;
-    public ?string $code;
     public int $userId;
     public DateTime $dateCreated;
     // lifetime is counted in seconds, not milliseconds

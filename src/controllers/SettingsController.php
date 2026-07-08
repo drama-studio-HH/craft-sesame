@@ -9,7 +9,7 @@ use yii\web\Response;
 
 class SettingsController extends Controller
 {
-    protected array|int|bool $allowAnonymous = false;
+    protected array|int|bool $allowAnonymous = true;
 
     public function actionSettings(): Response
     {

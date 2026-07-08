@@ -5,7 +5,6 @@ namespace thedrama\craftsesame\services;
 use Craft;
 use craft\elements\User;
 use DateTime;
-use Random\Randomizer;
 use thedrama\craftsesame\events\LoginEvent;
 use thedrama\craftsesame\events\MailEvent;
 use thedrama\craftsesame\events\ModifyTemplateEvent;
@@ -27,21 +26,6 @@ class AuthenticationService extends Component
     public function getToken(int $length = 32): string
     {
         return Craft::$app->getSecurity()->generateRandomString($length);
-    }
-
-    public function getCode(int $length = 4): string
-    {
-        if ($length < 0) {
-            $length = 4;
-        }
-        $randomizer = new Randomizer();
-        $code = '';
-        $count = 0;
-        while ($count < $length) {
-            $code .= $randomizer->getInt(0, 9);
-            $count++;
-        }
-        return $code;
     }
 
     // check if a given email can login or register
@@ -93,27 +77,18 @@ class AuthenticationService extends Component
     public function storeAuth(string $email): void
     {
         $user = User::find()->email($email)->one();
-        /** @var $settings \thedrama\craftsesame\models\Settings */
         $settings = Sesame::getInstance()->settingsService->getSettings();
         $token = $this->getToken();
-        $strategy = $settings->strategy;
         if ($user) {
             $record = new AuthenticationRecord();
             $record->userId = $user->id;
             $record->token = $token;
             $record->lifetime = $settings->lifetime; // load the lifetime from the plugin settings
             $record->dateCreated = new DateTime();
-            if ($strategy == "code") {
-                $code = $this->getCode(4);
-                $record->code = $code;
-                $template = Craft::$app->view->renderTemplate('sesame/email/code', [
-                    'code' => $code,
-                ]);
-            } else {
-                $template = Craft::$app->view->renderTemplate('sesame/email/login', [
-                    'token' => $token,
-                ]);
-            }
+
+            $template = Craft::$app->view->renderTemplate('sesame/email/login', [
+                'token' => $token
+            ]);
 
             $templateEvent = new ModifyTemplateEvent([
                 'template' => $template,
@@ -164,34 +139,6 @@ class AuthenticationService extends Component
         if ($authRecord->getIsExpired()) {
             $response->success = false;
             $response->errors[] = ['message' => 'The specified token is expired.'];
-            return $response;
-        }
-
-        $response->success = true;
-        $response->redirectUrl = Sesame::getInstance()->settingsService->getRedirectUrl();
-
-        return $response;
-    }
-
-    public function handleCodeLogin(?AuthenticationRecord $authRecord, string $code): AuthenticationResponse
-    {
-        $response = new AuthenticationResponse();
-
-        if (!$authRecord) {
-            $response->success = false;
-            $response->errors[] = ['message' => 'The specified user does not exist.'];
-            return $response;
-        }
-
-        if (!$authRecord->code) {
-            $response->success = false;
-            $response->errors[] = ['message' => 'The specified user was not registered properly.'];
-            return $response;
-        }
-
-        if ($authRecord->code != $code) {
-            $response->success = false;
-            $response->errors[] = ['message' => 'The provided code is incorrect.'];
             return $response;
         }
 
