@@ -4,7 +4,7 @@
 {% set renderFlashes = renderFlashes ?? false %}
 {% set toastBg = toastBg ?? '' %}
 
-<div class="sesame-login-container{% if applyFloatLabels %} float-labels{% endif %}">
+<div class="sesame-login-container{% if applyFloatLabels %} float-labels{% endif %}"{% if mail %} data-mail-entered{% endif %}>
     <div class="content">
         <div class="logo">
             <img src="{{ craft.sesame.logoUrl }}">
