@@ -3,13 +3,13 @@
 {% set applyFloatLabels = applyFloatLabels ?? true %}
 {% set renderFlashes = renderFlashes ?? false %}
 {% set toastBg = toastBg ?? '' %}
+{% set mail = craft.app.session.getFlash('mail', '', true) %}
 
 <div class="sesame-login-container{% if applyFloatLabels %} float-labels{% endif %}"{% if mail %} data-mail-entered{% endif %}>
     <div class="content">
         <div class="logo">
             <img src="{{ craft.sesame.logoUrl }}">
         </div>
-        {% set mail = craft.app.session.getFlash('mail', '', true) %}
         <span>
             {% if mail %}
                 {{ 'Your login request was handled successfully. If an account with the specified email exists, a mail will be sent to it.'|t('sesame') }}
